@@ -13,14 +13,15 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 public class Order extends BaseEntity {
 
-    @Column(name = "delivery_address", nullable = false)
+    @JoinColumn(name = "delivery_address", nullable = false)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Address deliveryAddress;
 
     @CreationTimestamp
-    private String deliveryDate;
+    private LocalDateTime deliveryDate;
 
     @Column(name = "is_paid", columnDefinition = "boolean default false")
     private Boolean isPaid;
@@ -32,7 +33,7 @@ public class Order extends BaseEntity {
     private Integer quantity;
 
     @Builder(builderMethodName = "childBuilder")
-    public Order(String Id, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Address deliveryAddress, String deliveryDate, Boolean isPaid, Boolean isDelivered, Integer quantity) {
+    public Order(String Id, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Address deliveryAddress, LocalDateTime deliveryDate, Boolean isPaid, Boolean isDelivered, Integer quantity) {
         super(Id, isActive, createdAt, updatedAt);
         this.deliveryAddress = deliveryAddress;
         this.deliveryDate = deliveryDate;

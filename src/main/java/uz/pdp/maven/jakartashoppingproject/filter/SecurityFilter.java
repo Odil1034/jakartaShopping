@@ -14,10 +14,12 @@ public class SecurityFilter implements Filter {
 
     private static final List<String> WHITE_LIST = List.of(
             "/",
-            "/product/product_list",
-            "/product/product_details",
-            "/user/login",
-            "/user/signup"
+            "/product/list",
+            "/product/detail/*",
+            "/login",
+            "/signup",
+            "/seller/magazine/create",
+            "/"
     );
 
     private static final Predicate<String> isOpen = WHITE_LIST::contains;
@@ -31,7 +33,7 @@ public class SecurityFilter implements Filter {
 
         System.out.println("requestURI = " + requestURI);
         if (!isOpen.test(requestURI)) {
-            response.sendError(401, "Unauthorized");
+            response.sendRedirect("/login");
         } else {
             chain.doFilter(request, response);
         }

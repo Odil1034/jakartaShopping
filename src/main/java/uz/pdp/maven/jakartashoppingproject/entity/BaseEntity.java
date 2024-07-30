@@ -7,7 +7,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Entity
 @Getter
 @Setter
 @AllArgsConstructor

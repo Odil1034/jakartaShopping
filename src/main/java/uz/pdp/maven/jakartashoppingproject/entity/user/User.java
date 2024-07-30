@@ -3,7 +3,6 @@ package uz.pdp.maven.jakartashoppingproject.entity.user;
 import jakarta.persistence.*;
 import lombok.*;
 import uz.pdp.maven.jakartashoppingproject.entity.BaseEntity;
-import uz.pdp.maven.jakartashoppingproject.entity.address.Address;
 
 import java.time.LocalDateTime;
 
@@ -13,28 +12,26 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@Table(name = "users")
 public class User extends BaseEntity {
 
-    @Column (unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column (nullable = false)
-    private UserRole role;
-
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String email;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String fullName;
 
     @Enumerated(EnumType.STRING)
-    private UserStatus status;
+    private UserRole role;
 
-    @OneToOne
-    private Address addressId;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     public enum UserRole {
         ADMIN,
@@ -49,7 +46,7 @@ public class User extends BaseEntity {
     }
 
     @Builder(builderMethodName = "childBuilder")
-    public User(String Id, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, String username, String password, UserRole role, String email, String fullName, UserStatus status, Address addressId) {
+    public User(String Id, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, String username, String password, UserRole role, String email, String fullName, UserStatus status) {
         super(Id, isActive, createdAt, updatedAt);
         this.username = username;
         this.password = password;
@@ -57,6 +54,5 @@ public class User extends BaseEntity {
         this.email = email;
         this.fullName = fullName;
         this.status = status;
-        this.addressId = addressId;
     }
 }

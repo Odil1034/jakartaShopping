@@ -23,7 +23,7 @@ public class Magazine extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User userId;
 
-    @OneToOne(mappedBy = "id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address addressId;
 
 

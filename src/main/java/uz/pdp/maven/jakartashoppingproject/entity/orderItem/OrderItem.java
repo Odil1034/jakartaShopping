@@ -16,21 +16,21 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class OrderItem extends BaseEntity {
 
-    @OneToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Column (name = "product_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "product_id")
     private Product productId;
 
-    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Column (name = "orders_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "orders_id", nullable = false)
     private Order ordersId;
 
     @Positive
     private Integer quantity;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private Double price;
 
-    @Builder (builderMethodName = "childBuilder")
+    @Builder(builderMethodName = "childBuilder")
     public OrderItem(String Id, Boolean isActive, LocalDateTime createdAt, LocalDateTime updatedAt, Product productId, Order ordersId) {
         super(Id, isActive, createdAt, updatedAt);
         this.productId = productId;

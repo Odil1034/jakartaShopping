@@ -32,20 +32,20 @@ public class Product extends BaseEntity {
     private Integer stockQuantity;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Magazine magazineId;
+    private Magazine magazine;
 
-    @ManyToMany (mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Picture> pictureId;
+    @ManyToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Picture> picture;
 
     @Builder(builderMethodName = "childBuilder")
-    public Product(String name, Category category, String description, Double price, Integer stockQuantity, Magazine magazineId, List<Picture> pictureId) {
+    public Product(String name, Category category, String description, Double price, Integer stockQuantity, Magazine magazine, List<Picture> picture) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
-        this.magazineId = magazineId;
-        this.pictureId = pictureId;
+        this.magazine = magazine;
+        this.picture = picture;
     }
 
     public enum Category {
